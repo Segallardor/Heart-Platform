@@ -22,7 +22,7 @@ func _physics_process(delta):
 	move_and_slide()
 	var just_left_ledge = was_on_floor and not is_on_floor() and velocity.y >= 0
 	if just_left_ledge:
-	coyote_jump_timer.start()
+		coyote_jump_timer.start()
 
 func apply_gravity(delta):
 	if not is_on_floor():
@@ -32,7 +32,7 @@ func handle_jump():
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 		if Input.is_action_just_pressed("ui_up"):
 			velocity.y = JUMP_VELOCITY
-	else:
+	if not is_on_floor():
 		if Input.is_action_just_released("ui_up") and velocity.y < JUMP_VELOCITY / 2:
 			velocity.y = JUMP_VELOCITY / 2
 
